@@ -1,2 +1,4 @@
 com\sina\service\ProductService.class
 com\sina\service\impl\ProductServiceImpl.class
+com\sina\service\OrdersService.class
+com\sina\service\impl\OrdersServiceImpl.class

@@ -1,1 +1,4 @@
 com\sina\domain\Product.class
+com\sina\domain\Orders.class
+com\sina\domain\Member.class
+com\sina\domain\Traveller.class
