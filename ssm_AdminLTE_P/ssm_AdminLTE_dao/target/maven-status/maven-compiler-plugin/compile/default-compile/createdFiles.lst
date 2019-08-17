@@ -4,3 +4,4 @@ com\sina\dao\RoleDao.class
 com\sina\dao\OrdersDao.class
 com\sina\dao\MemberDao.class
 com\sina\dao\ProductDao.class
+com\sina\dao\PermissionDao.class

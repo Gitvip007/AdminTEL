@@ -32,27 +32,24 @@
         <!-- 关闭跨域请求 -->
         <security:csrf disabled="true"/>
         <!-- 退出 -->
-        <security:logout invalidate-session="true" logout-url="/logout.do" logout-success-url="/login.jsp" />
+        <security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/login.jsp" />
 
     </security:http>
 
-    <!-- 切换成数据库中的用户名和密码 -->
-    <security:authentication-manager>
-        <security:authentication-provider user-service-ref="userServiceImpl"></security:authentication-provider>
-    </security:authentication-manager>
 
-    <!-- 配置加密类 -->
+
+    <!-- 配置加密类 可以在service实现了中直接注入，调用它的方法，进行加密-->
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
-    <!-- 提供了入门的方式，在内存中存入用户名和密码
+    <!-- 切换成数据库中的用户名和密码 -->
     <security:authentication-manager>
-    	<security:authentication-provider>
-    		<security:user-service>
-    			<security:user name="admin" password="{noop}admin" authorities="ROLE_USER"/>
-    		</security:user-service>
-    	</security:authentication-provider>
+        <security:authentication-provider user-service-ref="userServiceImpl">
+            <!-- 配置加密的方式-->
+            <!--在认证管理器中告知spring security密码加密算法  具体的加密在service实现类中，添加用户的时候对密码进行了加密-->
+            <security:password-encoder ref="passwordEncoder"></security:password-encoder>
+        </security:authentication-provider>
     </security:authentication-manager>
-    -->
+
 
 </beans>
 

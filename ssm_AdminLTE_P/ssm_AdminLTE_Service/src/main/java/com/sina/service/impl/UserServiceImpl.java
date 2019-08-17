@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,8 +30,8 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
 
-        //处理自己的用户对象封装成UserDetails
-        User user = new User(userInfo.getUsername(),"{noop}"+userInfo.getPassword(), userInfo.getStatus() == 0 ? false : true, true, true, true, getAuthority(userInfo.getRoles()));
+        //处理自己的用户对象 封装成UserDetails的实现类 返回
+        User user = new User(userInfo.getUsername(),userInfo.getPassword(), userInfo.getStatus() == 0 ? false : true, true, true, true, getAuthority(userInfo.getRoles()));
         return user;
     }
 
@@ -47,5 +48,42 @@ public class UserServiceImpl implements UserService {
             list.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
         }
         return list;
+    }
+
+    /**
+     * 查询所有的用户信息，返回list集合
+     * @return
+     */
+    public List<UserInfo> findAll() {
+        List<UserInfo> infoList = userDao.findAll();
+        return infoList;
+    }
+
+    /**
+     * 以在配置文件中配置好对应的bean，在此处注入就行
+     *
+     * 还有一种方式是不用配置对应的bean，在utils包中new 对象，然后在此处调用
+     */
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    /**
+     * 添加用户信息
+     * @param userInfo
+     */
+    public void save(UserInfo userInfo) {
+        userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
+        userDao.save(userInfo);
+    }
+
+
+    /**
+     * 查询详情
+     * 通过页面传来的id，查询user对象
+     * @param id
+     * @return
+     */
+    public UserInfo findById(String id) {
+        UserInfo userInfo = userDao.findById(id);
+        return userInfo;
     }
 }

@@ -1,2 +1,5 @@
 com\sina\controller\OrdersController.class
+com\sina\controller\UserController.class
 com\sina\controller\ProductController.class
+com\sina\controller\RoleController.class
+com\sina\controller\PermissionController.class
