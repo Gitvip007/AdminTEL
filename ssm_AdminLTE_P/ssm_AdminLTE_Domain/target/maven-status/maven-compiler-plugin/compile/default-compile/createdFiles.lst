@@ -1,4 +1,7 @@
 com\sina\domain\Product.class
 com\sina\domain\Orders.class
+com\sina\domain\UserInfo.class
+com\sina\domain\Permission.class
+com\sina\domain\Role.class
 com\sina\domain\Member.class
 com\sina\domain\Traveller.class
