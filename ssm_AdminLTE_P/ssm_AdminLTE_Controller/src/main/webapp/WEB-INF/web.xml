@@ -8,6 +8,10 @@
           http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
 
+    <!--配置request监听器   可以在任何类中注入request对象来使用-->
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
     <!--编码过滤器-->
     <filter>
         <filter-name>EncodingFilter</filter-name>

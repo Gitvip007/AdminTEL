@@ -1,5 +1,6 @@
 package com.sina.dao;
 
+import com.sina.domain.Role;
 import com.sina.domain.UserInfo;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
@@ -58,4 +59,23 @@ public interface UserDao {
             @Result(property = "roles",column = "id",many = @Many(select = "com.sina.dao.RoleDao.findById"))
     })
     public UserInfo findById(String id);
+
+
+    /**
+     * 通过user的id查询中间表的roleID
+     *通过roleId查询role对象
+     * @param id
+     * @return
+     */
+    @Select("select * from role where id not in(select roleId from users_role where userId=#{userId})")
+    List<Role> findOtherRoles(String id);
+
+    /**
+     * 给指定的用户添加角色信息
+     * 操作user 和 role 的中间表
+     * @param userId
+     * @param roleId
+     */
+    @Insert("insert into users_role(userId,roleId) values(#{userId},#{roleId})")
+    void saveUserIdAndRoleId(@Param("userId") String userId, @Param("roleId") String roleId);
 }

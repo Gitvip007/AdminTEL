@@ -1,3 +1,4 @@
+com\sina\domain\SysLog.class
 com\sina\domain\Product.class
 com\sina\domain\Orders.class
 com\sina\domain\UserInfo.class

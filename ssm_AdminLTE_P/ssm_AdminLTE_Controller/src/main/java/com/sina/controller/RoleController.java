@@ -1,6 +1,8 @@
 package com.sina.controller;
 
+import com.sina.domain.Permission;
 import com.sina.domain.Role;
+import com.sina.domain.UserInfo;
 import com.sina.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +40,35 @@ public class RoleController {
     @RequestMapping("/save")
     public String save(Role role){
         roleService.save(role);
+        return "redirect:findAll";
+    }
+
+    /**
+     * 通过页面传类的roleId查询 role对象
+     * 通过中间表查询role对象没有的 权限信息（集合）
+     * @param id
+     * @return
+     */
+    @RequestMapping("/findUserByIdAndAllRole")
+    public ModelAndView findUserByIdAndAllRole(String id){
+        ModelAndView mav = new ModelAndView();
+        Role role = roleService.findByRoleId(id);
+        List<Permission> permissionList = roleService.findOthersPermission(id);
+        mav.addObject("role",role);
+        mav.addObject("permissionList",permissionList);
+        mav.setViewName("role-permission-add");
+        return mav;
+    }
+
+    /**
+     * 给角色添加权限信息
+     * @param roleId
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/addPermissionToRole")
+    public String addPermissionToRole(String roleId,String[] ids){
+        roleService.addPermissionToRole(roleId,ids);
         return "redirect:findAll";
     }
 

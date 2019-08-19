@@ -1,5 +1,6 @@
 package com.sina.dao;
 
+import com.sina.domain.Permission;
 import com.sina.domain.Role;
 import org.apache.ibatis.annotations.*;
 
@@ -38,4 +39,30 @@ public interface RoleDao {
     @Insert("insert into role (roleName,roleDesc) values(#{roleName},#{roleDesc})")
     public void save(Role role);
 
+    /**
+     * 通过roleId查询role对象
+     * @param id
+     * @return
+     */
+    @Select("select * from role where id=#{id}")
+    Role findByRoleId(String id);
+
+    /**
+     * 通过roleId---中间表---查询permission的集合
+     * @param id
+     * @return
+     */
+    @Select("select * from permission where id not in(select permissionId from role_permission where roleId=#{roleId})")
+    List<Permission> findOthersPermission(String id);
+
+
+
+    /**
+     * 操作中间表，给角色添加权限
+     * 两者相关连
+     * @param roleId
+     * @param permissionId
+     */
+    @Insert("insert into role_permission(roleId,permissionId) values(#{roleId},#{permissionId})")
+    void addPermissionToRole(@Param("roleId") String roleId, @Param("permissionId") String permissionId);
 }

@@ -1,10 +1,12 @@
+com\sina\service\impl\SysLogServiceImpl.class
 com\sina\service\ProductService.class
-com\sina\service\impl\ProductServiceImpl.class
 com\sina\service\OrdersService.class
+com\sina\service\PermissionService.class
+com\sina\service\impl\PermissionServiceImpl.class
+com\sina\service\impl\ProductServiceImpl.class
 com\sina\service\UserService.class
 com\sina\service\RoleService.class
 com\sina\service\impl\RoleServiceImpl.class
-com\sina\service\PermissionService.class
+com\sina\service\SysLogService.class
 com\sina\service\impl\OrdersServiceImpl.class
-com\sina\service\impl\PermissionServiceImpl.class
 com\sina\service\impl\UserServiceImpl.class

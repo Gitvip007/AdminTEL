@@ -86,4 +86,30 @@ public class UserServiceImpl implements UserService {
         UserInfo userInfo = userDao.findById(id);
         return userInfo;
     }
+
+    /**
+     * 通过user的id查询中间表的roleID
+     * 通过roleId查询role对象
+     * @param id
+     * @return
+     */
+    public List<Role> findOtherRoles(String id) {
+        List<Role> roleList = userDao.findOtherRoles(id);
+        return roleList;
+    }
+
+
+    /**
+     * 给指定的用户添加角色信息
+     * 操作user 和 role 的中间表
+     * @param userId
+     * @param ids
+     */
+    public void saveUserIdAndRoleId(String userId, String[] ids) {
+        for (String roleId : ids) {
+            userDao.saveUserIdAndRoleId(userId,roleId);
+        }
+    }
+
+
 }

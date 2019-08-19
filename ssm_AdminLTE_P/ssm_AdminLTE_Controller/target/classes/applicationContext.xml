@@ -16,6 +16,7 @@
 			    http://www.springframework.org/schema/mvc
 			    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+
     <!--引入service  和 dao  层的spring核心配置文件-->
     <import resource="classpath:spring/applicationContext-service.xml"></import>
     <import resource="classpath:spring/applicationContext-dao.xml"></import>

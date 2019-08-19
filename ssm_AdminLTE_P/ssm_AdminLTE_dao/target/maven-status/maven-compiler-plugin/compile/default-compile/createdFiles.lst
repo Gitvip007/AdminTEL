@@ -1,6 +1,7 @@
 com\sina\dao\TravellerfDao.class
 com\sina\dao\UserDao.class
 com\sina\dao\RoleDao.class
+com\sina\dao\SysLogDao.class
 com\sina\dao\OrdersDao.class
 com\sina\dao\MemberDao.class
 com\sina\dao\ProductDao.class
